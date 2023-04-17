@@ -1,0 +1,28 @@
+{
+  "name": "cell-engine-2",
+  "version": "1.0.0",
+  "description": "YO WHAT?!??? AINT NO WAY",
+  "main": "index",
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maffiemaffie/cell-engine-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maffiemaffie/cell-engine-2/issues"
+  },
+  "homepage": "https://github.com/maffiemaffie/cell-engine-2#readme",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.4"
+  }
+}
