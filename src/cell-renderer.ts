@@ -17,25 +17,34 @@ class CellRenderer {
 
         for (let y = 0; y < this.#cols; y++) {
         for (let x = 0; x < this.#rows; x++) {
+            this.#ctx.save();
+            this.#ctx.translate(x, y);
+            this.#ctx.scale(this.#canvas.width / this.#cols, this.#canvas.height / this.#rows);
+
             drawer.draw.call(drawer, {
+                ctx: this.#ctx,
                 x: x,
                 y: y,
                 cols: this.#cols,
                 rows: this.#rows
             });
+            this.#ctx.restore();
         }
         }
     }
 }
 
 interface DrawArgs {
-    x:number;
-    y:number;
-    cols:number;
-    rows:number;
+    ctx:CanvasRenderingContext2D;
+    readonly x:number;
+    readonly y:number;
+    readonly cols:number;
+    readonly rows:number;
 }
 
 interface Drawer {
     setup:(ctx:CanvasRenderingContext2D)=>void;
     draw:(args:DrawArgs)=>void;
 }
+
+export { CellRenderer, DrawArgs, Drawer };
