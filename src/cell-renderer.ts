@@ -1,19 +1,49 @@
-class CellRenderer {
+/**
+ * Class contains properties and methods for rendering a grid of cells to a dynamically created canvas.
+ */
+class Renderer {
+    /**
+     * The number of rows in the grid.
+     */
     #rows:number;
+
+    /**
+     * The number of columns in the grid.
+     */
     #cols:number;
-    canvas:HTMLCanvasElement;
+
+    /**
+     * The canvas that the grid will be rendered on.
+     */
+    readonly canvas:HTMLCanvasElement;
+
+    /**
+     * The rendering context that the grid will be rendered to.
+     */
     #ctx:CanvasRenderingContext2D;
 
+    /**
+     * Initializes a new instance of the Renderer class with the specified dimensions.
+     * @param cols The number of columns in the newly created grid.
+     * @param rows The number of rows in the newly created grid.
+     */
     constructor(cols:number, rows:number = cols) {
         this.#rows = cols;
         this.#cols = rows;
 
         this.canvas = document.createElement('canvas');
+        this.canvas.width = 400;
+        this.canvas.height = 400;
         this.#ctx = this.canvas.getContext('2d')!;
     }
 
-    draw(drawer:Drawer) {
-        drawer.setup.call(drawer, {
+    /**
+     * Renders the grid to its canvas.
+     * See {@link Drawer}.
+     * @param drawer Contains the methods for rendering each cell of the grid.
+     */
+    draw(drawer:Drawer):void {
+        drawer.setup.call(drawer, this, {
             ctx: this.#ctx,
             x: 0,
             y: 0,
@@ -24,10 +54,10 @@ class CellRenderer {
         for (let y = 0; y < this.#cols; y++) {
         for (let x = 0; x < this.#rows; x++) {
             this.#ctx.save();
-            this.#ctx.translate(x, y);
             this.#ctx.scale(this.canvas.width / this.#cols, this.canvas.height / this.#rows);
+            this.#ctx.translate(x, y);
 
-            drawer.draw.call(drawer, {
+            drawer.draw.call(drawer, this, {
                 ctx: this.#ctx,
                 x: x,
                 y: y,
@@ -38,19 +68,66 @@ class CellRenderer {
         }
         }
     }
+
+    /**
+     * Utility method fills the entire canvas with a specified color.
+     * @param color The CSS color representation of the desired color.
+     */
+    fill(color:string):void {
+        this.#ctx.save();
+        this.#ctx.fillStyle = color;
+        this.#ctx.fillRect(0, 0, this.#cols, this.#rows);
+        this.#ctx.restore();
+    }
 }
 
+/**
+ * Contains properties for cell rendering.
+ */
 interface DrawArgs {
+    /**
+     * The rendering context that the grid will be rendered to.
+     */
     ctx:CanvasRenderingContext2D;
+
+    /**
+     * The column of the current cell.
+     */
     readonly x:number;
+
+    /**
+     * The row of the curent cell.
+     */
     readonly y:number;
+
+    /**
+     * The number of columns in the entire grid.
+     */
     readonly cols:number;
+    
+    /**
+     * The number of rows in the entire grid.
+     */
     readonly rows:number;
 }
 
+/**
+ * Contains methods for cell rendering.
+ */
 interface Drawer {
-    setup:(args:DrawArgs)=>void;
-    draw:(args:DrawArgs)=>void;
+    /**
+     * Method is called once on the entire canvas before any cells are rendered.
+     * @param sender The {@link Renderer} that called this method.
+     * @param args The {@link DrawArgs} containing helpful properties for rendering.
+     */
+    setup:(sender:Renderer, args:DrawArgs)=>void;
+
+    /**
+     * Method is called locally for each cell in the grid.
+     * @param sender The {@link Renderer} that called this method.
+     * @param args The {@link DrawArgs} containing helpful properties for rendering.
+     */
+    draw:(sender:Renderer, args:DrawArgs)=>void;
 }
 
-export { CellRenderer, DrawArgs, Drawer };
+export { Renderer, DrawArgs, Drawer };
