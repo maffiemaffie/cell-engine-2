@@ -1,1 +1,1 @@
-export { Renderer } from './cell-renderer.js';
+export * as CellRenderer from './cell-renderer.js';

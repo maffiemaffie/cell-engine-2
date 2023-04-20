@@ -25,6 +25,12 @@ declare class Renderer {
      */
     constructor(cols: number, rows?: number);
     /**
+     * Adjusts the size of the canvas to a specified width and height.
+     * @param width The desired width of the canvas.
+     * @param height The desired height of the canvas.
+     */
+    resizeCanvas(width: number, height: number): void;
+    /**
      * Renders the grid to its canvas.
      * See {@link Drawer}.
      * @param drawer Contains the methods for rendering each cell of the grid.

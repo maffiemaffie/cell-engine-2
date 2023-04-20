@@ -38,6 +38,16 @@ class Renderer {
     }
 
     /**
+     * Adjusts the size of the canvas to a specified width and height.
+     * @param width The desired width of the canvas.
+     * @param height The desired height of the canvas.
+     */
+    resizeCanvas(width:number, height:number) {
+        this.canvas.width = width;
+        this.canvas.height = height;
+    }
+
+    /**
      * Renders the grid to its canvas.
      * See {@link Drawer}.
      * @param drawer Contains the methods for rendering each cell of the grid.
@@ -76,7 +86,7 @@ class Renderer {
     fill(color:string):void {
         this.ctx.save();
         this.ctx.fillStyle = color;
-        this.ctx.fillRect(0, 0, this.cols, this.rows);
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.restore();
     }
 }

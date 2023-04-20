@@ -1,6 +1,6 @@
 {
   "name": "cell-renderer",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "YO WHAT?!??? AINT NO WAY",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
