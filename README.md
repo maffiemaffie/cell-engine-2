@@ -5,10 +5,7 @@ CELL ENGINE 2!!!!??? WITH FEWER FEATURES THAN THE ORIGINAL!???
 (yea that was a lot of things together that didn't need to be together we're separating those lol but um at least it doesn't use p5 anymore :thumbsup:)
 
 ## Installation
-easy shit just import the module :weary:
-```js
-import * as CellRenderer from 'path/to/cell-renderer.js';
-```
+`npm install --save cell-renderer`
 
 ## Getting Started
 Let's set-up a simple program.

@@ -1,14 +1,19 @@
 {
-  "name": "cell-engine-2",
-  "version": "1.0.0",
+  "name": "cell-renderer",
+  "version": "1.0.1",
   "description": "YO WHAT?!??? AINT NO WAY",
-  "main": "index",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "files": [
+    "dist/"
+  ],
   "directories": {
     "doc": "docs",
     "example": "examples"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json"
   },
   "repository": {
     "type": "git",
